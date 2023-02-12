@@ -1,3 +1,5 @@
 ---
 # defaults file for vector-role
+lighthouse_url: "https://github.com/VKCOM/lighthouse.git"
 lighthouse_version: "master"
+lighthouse_dir: "/home/{{ ansible_user_id }}/lighthouse"
