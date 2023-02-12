@@ -1,0 +1,17 @@
+galaxy_info:
+  role_name: lighthouse
+  author: Ilya T.
+  namespace: marc010
+  description: This role install lighthouse
+
+  license: MIT
+
+  min_ansible_version: 2.10
+
+  platforms:
+    - name: EL
+      versions:
+        - 7
+        - 8
+
+dependencies: []
