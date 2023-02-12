@@ -17,7 +17,6 @@ Role Variables
 |--------------------|----------------------------------|
 | lighthouse_url     | URL to lighthouse                |
 | lighthouse_version | Version of lighthouse to install |
-| lighthouse_dir     | Path to lighhouse files          |
 
 
 Example Playbook
@@ -25,9 +24,6 @@ Example Playbook
 
 Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
 
-    - hosts: servers
-      roles:
-         - { role: lighthouse-role }
 
 ```
 - name: Install Lighthouse
@@ -38,7 +34,7 @@ Including an example of how to use your role (for instance, with variables passe
       ansible.builtin.service:
         name: nginx
         state: restarted
-  prt_task:
+  pre_tasks:
     - name: Install required packages
       become: true
       ansible.builtin.yum:
@@ -46,27 +42,26 @@ Including an example of how to use your role (for instance, with variables passe
           - epel-release
           - git
         state: present
-      tags:
-        - install
     - name: Install nginx
       become: true
       ansible.builtin.yum:
         name:
           - nginx
         state: present
-      tags:
-        - install
     - name: Setup nginx config
       become: true
       ansible.builtin.template:
         src: ./templates/nginx.conf
         dest: /etc/nginx/nginx.conf
         mode: '0644'
-      notify: Start nginx service
-      tags:
-        - install
       roles:
          - { role: lighthouse-role }
+  post_tasks:
+    - name: Start nginx service
+      become: true
+      ansible.builtin.service:
+        name: nginx
+        state: restarted         
 ```
 
 License

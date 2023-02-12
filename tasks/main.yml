@@ -5,4 +5,4 @@
   ansible.builtin.git:
     repo: "{{ lighthouse_url }}"
     version: "{{ master }}"
-    dest: "{{ lighthouse_dir }}"
+    dest: "~/lighthouse"
